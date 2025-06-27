@@ -1,6 +1,7 @@
-import express from 'express';
 import dotenv from 'dotenv';
- 
+ dotenv.config();
+
+import express from 'express';
 
 import authRoutes from './routes/auth.route.js'
 import userRoutes from './routes/user.route.js'
@@ -12,7 +13,7 @@ import cors from 'cors'
 import path from "path"
 import { ApiError } from './utils/ApiError.js';
 
-dotenv.config();
+
 
 const app = express();
 const port = process.env.PORT;
@@ -33,10 +34,10 @@ app.use("/api/users",userRoutes);
 app.use("/api/chat",chatRoutes);
 
 if(process.env.NODE_ENV === "production"){
-  app.use(express.static(path.join(__dirname,"../frontend/dist")))
+  app.use(express.static(path.join(__dirname,"../Frontend/dist")))
 
   app.get("*",(req,res)=>{
-    res.sendFile(path.join(__dirname,"../frontend/dist/index.html"))
+    res.sendFile(path.join(__dirname,"../Frontend/dist/index.html"))
   })
 }
 
